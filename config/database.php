@@ -63,11 +63,11 @@ return [
         ],
 
         'mysql_testing' => [
-            'driver' => 'mysql_testing',
+            'driver' => 'mysql',
             'url' => env('DB_URL_TESTING'),
             'host' => env('DB_HOST_TESTING', '127.0.0.1'),
             'port' => env('DB_PORT_TESTING', '3306'),
-            'database' => env('_TESTING', 'laravel_testing'),
+            'database' => env('DB_DATABASE_TESTING', 'laravel_testing'),
             'username' => env('DB_USERNAME_TESTING', 'root'),
             'password' => env('DB_PASSWORD_TESTING', ''),
             'unix_socket' => env('DB_SOCKET', ''),
