@@ -19,12 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->text('address_line_1')->nullable();
-            $table->text('address_line_2')->nullable();
-            $table->string('city')->nullable();
-            $table->unsignedBigInteger('state_id')->nullable();
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->string('zip_code')->nullable();
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
