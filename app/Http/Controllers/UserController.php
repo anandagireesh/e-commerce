@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User\User;
 use App\Services\ApiResponseService;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,6 @@ class UserController extends Controller
     {
         $user = $request->user();
         $user->load('address');
-        return $this->apiResponseService->success('User profile', $user);
+        return $this->apiResponseService->success('User profile', new User($user));
     }
 }

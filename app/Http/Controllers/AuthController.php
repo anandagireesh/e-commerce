@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserLoginRequest;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\User\UserLoginRequest;
+use App\Http\Requests\User\UserRequest;
+use App\Http\Resources\User\User as ResourcesUser;
 use App\Models\User;
 use App\Services\ApiResponseService;
 use App\Services\ImageHandleService;
@@ -36,7 +37,7 @@ class AuthController extends Controller
             DB::commit();
             $token = $user->createToken('auth_token')->plainTextToken;
             $user['token'] = $token;
-            return $this->apiResponseService->success('User created successfully', $user);
+            return $this->apiResponseService->success('User created successfully', new ResourcesUser($user));
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->apiResponseService->error('Failed to create user', 500, $e->getMessage());
@@ -52,7 +53,7 @@ class AuthController extends Controller
             }
             $token = $user->createToken('auth_token')->plainTextToken;
             $user['token'] = $token;
-            return $this->apiResponseService->success('User logged in successfully', $user);
+            return $this->apiResponseService->success('User logged in successfully', new ResourcesUser($user));
         } catch (\Exception $e) {
             return $this->apiResponseService->error('Failed to login', 500, $e->getMessage());
         }

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Kayandra\Hashidable\Hashidable;
 
 class Address extends Model
 {
+    use Hashidable;
     protected $table = 'addresses';
     protected $fillable = [
         'address_line_1',
@@ -20,5 +22,15 @@ class Address extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }
