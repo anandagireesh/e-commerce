@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\Interfaces\Category\CategoryInterface;
-use App\Models\Category;
+use App\Interfaces\Category\CategoryInterface;
 use App\Services\ApiResponseService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     protected $apiResponseService;
-    protected $categoryRepository;
     protected $categoryInterface;
 
     public function __construct(ApiResponseService $apiResponseService, CategoryInterface $categoryInterface)

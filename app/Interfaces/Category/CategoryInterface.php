@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Interfaces\Category;
+namespace App\Interfaces\Category;
 
 interface CategoryInterface
 {

@@ -4,10 +4,11 @@ namespace App\Repositories\Category;
 
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategoryResourceCollection;
+use App\Interfaces\Category\CategoryInterface;
 use App\Models\Category;
 use Illuminate\Support\Str;
 
-class CategoryRepository
+class CategoryRepository implements CategoryInterface
 {
     /**
      * Create a new class instance.
