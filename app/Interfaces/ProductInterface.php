@@ -8,4 +8,6 @@ interface ProductInterface
     public function storeProduct($request);
     public function updateProduct($request, $product);
     public function deleteProduct($product);
+    public function updateStock($request, $product);
+    public function getProduct($product);
 }

@@ -62,4 +62,16 @@ class ProductController extends Controller
         $product = $this->productInterface->deleteProduct($product);
         return $this->apiResponseService->success('Product deleted successfully', $product);
     }
+
+    public function updateStock(Request $request, $product)
+    {
+        $product = $this->productInterface->updateStock($request, $product);
+        return $this->apiResponseService->success('Product stock updated successfully', $product);
+    }
+
+    public function show($product)
+    {
+        $product = $this->productInterface->getProduct($product);
+        return $this->apiResponseService->success('Product fetched successfully', $product);
+    }
 }

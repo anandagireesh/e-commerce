@@ -83,8 +83,24 @@ class ProductRepository implements ProductInterface
             $product = Product::findByHashidOrFail($product);
         }
         // dd($product);
-        $productData = $request->only(['name', 'description', 'price', 'stock']);
+        $productData = $request->only(['name', 'description', 'price']);
         $product->update($productData);
+
+        if ($request->hasFile('images')) {
+            // Delete existing images if new ones are being uploaded
+            $product->images()->delete();
+
+            foreach ($request->file('images') as $key => $file) {
+                $image = $this->imageHandleService->uploadImage($file, 'products/' . Str::slug($product->name, '_') . '_' . $product->id);
+                $isPrimary = $request->has('is_primary') ?
+                    $request->is_primary == $key : ($key === 0);
+
+                $product->images()->create([
+                    'image' => $image,
+                    'is_primary' => $isPrimary,
+                ]);
+            }
+        }
 
         if ($request->has('category_id')) {
             $product->categories()->sync($request->category_id);
@@ -98,6 +114,29 @@ class ProductRepository implements ProductInterface
             $product = Product::findByHashidOrFail($product);
         }
         $product->delete();
+        return $product;
+    }
+
+    public function updateStock($request, $product)
+    {
+        if (!$product instanceof Product) {
+            $product = Product::findByHashidOrFail($product);
+        }
+        $product->stocks()->updateOrCreate(
+            ['product_id' => $product->id],
+            ['stock' => $request->stock]
+        );
+        $product->update([
+            'stock' => $product->stock + $request->stock
+        ]);
+        return $product;
+    }
+
+    public function getProduct($product)
+    {
+        if (!$product instanceof Product) {
+            $product = Product::findByHashidOrFail($product);
+        }
         return $product;
     }
 }
