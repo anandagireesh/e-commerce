@@ -6,4 +6,6 @@ interface ProductInterface
 {
     public function getProducts($filters);
     public function storeProduct($request);
+    public function updateProduct($request, $product);
+    public function deleteProduct($product);
 }

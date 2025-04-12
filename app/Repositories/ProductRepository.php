@@ -56,6 +56,9 @@ class ProductRepository implements ProductInterface
             $product = Product::create($productData);
             $productStock = $request->only(['stock']);
             $product->stocks()->create($productStock);
+            if (isset($request->category_id)) {
+                $product->categories()->sync($request->category_id);
+            }
             if (isset($request->images)) {
                 $hasPrimary = $product->images()->where('is_primary', true)->exists();
                 foreach ($request->file('images') as $key => $file) {
@@ -72,5 +75,29 @@ class ProductRepository implements ProductInterface
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function updateProduct($request, $product)
+    {
+        if (!$product instanceof Product) {
+            $product = Product::findByHashidOrFail($product);
+        }
+        // dd($product);
+        $productData = $request->only(['name', 'description', 'price', 'stock']);
+        $product->update($productData);
+
+        if ($request->has('category_id')) {
+            $product->categories()->sync($request->category_id);
+        }
+        return $product;
+    }
+
+    public function deleteProduct($product)
+    {
+        if (!$product instanceof Product) {
+            $product = Product::findByHashidOrFail($product);
+        }
+        $product->delete();
+        return $product;
     }
 }

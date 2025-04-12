@@ -50,4 +50,16 @@ class ProductController extends Controller
             ]
         );
     }
+
+    public function update(Request $request, $product)
+    {
+        $product = $this->productInterface->updateProduct($request, $product);
+        return $this->apiResponseService->success('Product updated successfully', $product);
+    }
+
+    public function destroy($product)
+    {
+        $product = $this->productInterface->deleteProduct($product);
+        return $this->apiResponseService->success('Product deleted successfully', $product);
+    }
 }

@@ -17,6 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->resource->getRouteKey(),
             'name' => $this->resource->name,
+            'slug' => $this->resource->slug,
         ];
     }
 }
