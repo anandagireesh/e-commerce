@@ -22,6 +22,7 @@ class User extends JsonResource
             'phone' => $this->resource->phone,
             'profile_pic' => $this->resource->profile_pic,
             'addresses' => UserAddressResource::collection($this->resource->address),
+            'token' => $this->resource->token,
         ];
     }
 
