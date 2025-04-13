@@ -29,6 +29,7 @@ class AuthController extends Controller
             $userData = $request->only(['first_name', 'last_name', 'email', 'password', 'phone']);
             $userData['password'] = Hash::make($request->password);
             $user = User::create($userData);
+            $user->assignRole('Customer');
             $user->address()->create($request->only(['address_line_1', 'address_line_2', 'city', 'state_id', 'country_id', 'zip_code']));
             if ($request->hasFile('profile_pic')) {
                 $user->profile_pic = $this->imageHandleService->uploadImage($request->file('profile_pic'), 'users');
