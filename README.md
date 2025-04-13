@@ -68,6 +68,17 @@ php artisan migrate
 php artisan db:seed
 ```
 
+7. Configure S3 Storage
+
+Add the following variables to your `.env` file:
+
+```bash
+AWS_ACCESS_KEY_ID=your_access_key_id
+AWS_SECRET_ACCESS_KEY=your_secret_access_key
+AWS_DEFAULT_REGION=your_region
+AWS_BUCKET=your_bucket_name
+```
+
 7. Run tests
 
 ```bash
