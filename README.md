@@ -79,13 +79,13 @@ AWS_DEFAULT_REGION=your_region
 AWS_BUCKET=your_bucket_name
 ```
 
-7. Run tests
+8. Run tests
 
 ```bash
 php artisan test
 ```
 
-8. Run server
+9. Run server
 
 ```bash
 php artisan serve
