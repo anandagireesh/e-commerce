@@ -19,7 +19,11 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            // CustomerSeeder::class,
+            // CategorySeeder::class,
+            // ProductSeeder::class,
+            // OrderSeeder::class
         ]);
     }
 }
