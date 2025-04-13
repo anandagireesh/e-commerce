@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\Product\DeleteProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Interfaces\ProductInterface;
 use App\Services\ApiResponseService;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class ProductController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function create(CreateProductRequest $request)
     {
         try {
             $this->productInterface->storeProduct($request);
@@ -51,7 +53,7 @@ class ProductController extends Controller
         );
     }
 
-    public function update(Request $request, $product)
+    public function update(UpdateProductRequest $request, $product)
     {
         $product = $this->productInterface->updateProduct($request, $product);
         return $this->apiResponseService->success('Product updated successfully', $product);

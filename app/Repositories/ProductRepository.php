@@ -31,9 +31,11 @@ class ProductRepository implements ProductInterface
         if (!empty($filters['sort_by'])) {
             $products->orderBy($filters['sort_by'], $filters['sort_direction']);
         }
-        // if (!empty($filters['per_page']) || !empty($filters['page'])) {
-        //     $products->paginate($filters['per_page'], ['*'], 'page', $filters['page']);
-        // }
+        if (!empty($filters['category_id'])) {
+            $products->whereHas('categories', function ($query) use ($filters) {
+                $query->where('category_id', $filters['category_id']);
+            });
+        }
         $products = $products->paginate($perPage, ['*'], 'page', $page);
         $resourceCollection = new ProductResourceCollection($products);
         return [
