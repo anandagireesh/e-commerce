@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateProductRequest;
-use App\Http\Requests\Product\DeleteProductRequest;
+use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Interfaces\ProductInterface;
 use App\Services\ApiResponseService;
 use Illuminate\Http\Request;
-use App\Http\Resources\Product\ProductResourceCollection;
+
 
 class ProductController extends Controller
 {

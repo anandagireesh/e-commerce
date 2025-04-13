@@ -19,21 +19,28 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
-        return $this->categoryInterface->storeCategory($request);
+        $this->categoryInterface->storeCategory($request);
+        return $this->apiResponseService->success('Category created successfully', 200);
     }
 
     public function index(Request $request)
     {
-        return $this->categoryInterface->getCategories($request->all());
+        $categories = $this->categoryInterface->getCategories($request->all());
+        return $this->apiResponseService->success('Categories fetched successfully', $categories['data'], 200, [
+            'pagination' => $categories['pagination']
+        ]);
     }
 
     public function update(Request $request, $category)
     {
-        return $this->categoryInterface->updateCategory($request, $category);
+        $this->categoryInterface->updateCategory($request, $category);
+        return $this->apiResponseService->success('Category updated successfully', 200);
     }
 
     public function destroy($category)
     {
-        return $this->categoryInterface->deleteCategory($category);
+        $this->categoryInterface->deleteCategory($category);
+
+        return $this->apiResponseService->success('Category deleted successfully', 200);
     }
 }

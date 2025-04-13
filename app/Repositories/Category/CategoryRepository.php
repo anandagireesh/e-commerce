@@ -54,12 +54,14 @@ class CategoryRepository implements CategoryInterface
 
     public function updateCategory($request, $category)
     {
+        $category = Category::findByHashid($category);
         $category->update($request->only(['name']));
         return new CategoryResource($category);
     }
 
     public function deleteCategory($category)
     {
+        $category = Category::findByHashid($category);
         $category->delete();
         return new CategoryResource($category);
     }
